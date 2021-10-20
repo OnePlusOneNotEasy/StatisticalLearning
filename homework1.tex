@@ -1,0 +1,55 @@
+\documentclass[12pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs}
+
+\title{\textbf{课程作业}}
+\author{杨佳乐}
+\date{\today}
+\linespread{1.5}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\par}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}
+3.6
+\end{problem}
+\begin{solution}
+由贝叶斯法则可知，$\beta$的后验概率$P(\beta|D)$和似然度乘以先验概率$P(D|\beta)P(\beta)$成正比，边缘概率$P(D)$为定值。$P(D|\beta)\sim N(X^T\beta,\sigma^2I)$，$P(\beta)\sim N(0,\tau I)$。\par
+$$log(P(D|\beta)P(\beta))\propto{-\frac{(y-X\beta)^T(y-X\beta)}{2\sigma^2}-\frac{\beta^T\beta}{2\tau}}$$
+$$\propto{-(\frac{1}{2\sigma^2}\sum_{i=1}^{N}[y_i-\beta_0-\sum_{j=1}^{p}x_{ij}\beta_j]^2+\frac{1}{2\tau}\sum_{j=1}^{p}\beta_j^2)}$$
+$$\beta_{ridge}=argmax_{\beta}{-(\frac{1}{2\sigma^2}\sum_{i=1}^{N}[y_i-\beta_0-\sum_{j=1}^{p}x_{ij}\beta_j]^2+\frac{1}{2\tau}\sum_{j=1}^{p}\beta_j^2)}$$
+两边同时乘以$2\sigma^2$,令$ \lambda =\frac{\sigma^2}{\tau}$，得到两个方差相加的形式。\par
+因为两个正态分布概率密度函数相乘结果还是服从正态分布，$\beta$取当右边为最大值时的值，这时候$\beta$为均值，也为众数。
+\end{solution}
+
+\begin{problem}
+3.7
+\end{problem}
+\begin{solution}
+题目3.7的解法跟3.6完全一样，只是3.6中$\beta$的方差为$\tau$,3.7中$\beta$的方差为$\tau^2$。
+\end{solution}
+
+
+\begin{problem}
+3.8
+\end{problem}
+\begin{solution}
+假设$Q=(q_0,q_1,...,q_p)(N\times P), X =(e,x_1,x_2,...,X_p)=QR$，
+让$q_0=\frac{e}{\sqrt{N}}, r_{00}=\sqrt{N}$。\par
+当$1\le{j}\le{p}$时，可以得到$\bar{q_j}=\frac{e^{T}q_j}{N}=\frac{q_0^{T}q_j}{\sqrt{N}}=0$
+$x_j=\sum_{k=0}^{j}r_{kj}q_{k}$，$\bar{x_j}=\frac{r_{0j}}{\sqrt{N}}$。可以推出$x_j-\bar{x_j}e=\sum_{k=1}{p}r_{kj}q_{k}$。\par
+$R_2$是R右下方一个分块矩阵$(p\times p)$,则$R = \begin{pmatrix} \sqrt{N} & \sqrt{N}(\bar{x_1},...,\bar{x_p}) \\ 0 & R_2 \end{pmatrix}$。\par
+所以可以推出$Q_2R_2=\tilde{X}=UDV^T$。$Q_2$是一组基，可以看出它张成的空间和$U$一样。
+\end{solution}
+
+
+
+
+
+
+\end{document}
